@@ -5,18 +5,17 @@ from fsub.config import (
     FORCE_SUB_,
     LOGGER,
     BOT_TOKEN,
-    BUTTON_ROW,
 )
 
 class Bot(Client):
     def __init__(self):
         super().__init__(
             name="Bot",
-            api_hash="50fbcbc4b837edfb811baf354af0d02d",
             api_id=26087227,
+            api_hash="50fbcbc4b837edfb811baf354af0d02d",
             plugins={"root": "plugins"},
-            workers=BUTTON_ROW,
             bot_token=BOT_TOKEN,
+            in_memory=False,
         )
         self.LOGGER = LOGGER
 
