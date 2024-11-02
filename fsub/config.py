@@ -11,16 +11,9 @@ CHANNEL_ID = int(getenv("CHANNEL_ID"))
 OWNER = getenv("OWNER")
 PROTECT_CONTENT = strtobool(getenv("PROTECT_CONTENT", "False"))
 DB_URI = getenv("DATABASE_URL")
-BUTTON_ROW = int(getenv("BUTTON_ROW", 2))
-FORCE_SUB_ = {}
-FSUB_TOTAL = 1
-while True:
-    key = f"FORCE_SUB_{FSUB_TOTAL}"
-    value = getenv(key)
-    if value is None:
-        break
-    FORCE_SUB_[FSUB_TOTAL] = int(value)
-    FSUB_TOTAL += 1
+FORCE_SUB_1 = int(os.environ.get("FORCE_SUB_1", "0"))
+FORCE_SUB_2 = int(os.environ.get("FORCE_SUB_2", "0"))
+TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "4"))
 START_MSG = getenv(
     "START_MESSAGE",
     "<b>🙋🏻‍♂️ʜᴀʟᴏ {mention}!</b>\n\n"
