@@ -8,16 +8,52 @@ from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 
 from fsub.config import ADMINS, FORCE_SUB_
 
-async def subscribed(filter, client, update):
+async def subschannel(filter, client, update):
+    if not FORCE_SUB_CHANNEL:
+        return True
     user_id = update.from_user.id
     if user_id in ADMINS:
         return True
+    try:
+        member = await client.get_chat_member(
+            chat_id=FORCE_SUB_CHANNEL, user_id=user_id
+        )
+    except UserNotParticipant:
+        return False
 
-    for key, channel_id in FORCE_SUB_.items():
-        try:
-            member = await client.get_chat_member(chat_id=channel_id, user_id=user_id)
-        except UserNotParticipant:
-            return False
+    return member.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]
+
+async def subsgroup(filter, client, update):
+    if not FORCE_SUB_GROUP:
+        return True
+    user_id = update.from_user.id
+    if user_id in ADMINS:
+        return True
+    try:
+        member = await client.get_chat_member(chat_id=FORCE_SUB_GROUP, user_id=user_id)
+    except UserNotParticipant:
+        return False
+
+    return member.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]
+
+async def is_subscribed(filter, client, update):
+    if not FORCE_SUB_CHANNEL:
+        return True
+    if not FORCE_SUB_GROUP:
+        return True
+    user_id = update.from_user.id
+    if user_id in ADMINS:
+        return True
+    try:
+        member = await client.get_chat_member(chat_id=FORCE_SUB_GROUP, user_id=user_id)
+    except UserNotParticipant:
+        return False
+    try:
+        member = await client.get_chat_member(
+            chat_id=FORCE_SUB_CHANNEL, user_id=user_id
+        )
+    except UserNotParticipant:
+        return False
 
     return member.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]
 
@@ -75,4 +111,6 @@ async def get_message_id(client, message):
         elif channel_id == client.db_channel.username:
             return msg_id
 
-is_subscriber = filters.create(subscribed)
+subsgc = filters.create(subsgroup)
+subsch = filters.create(subschannel)
+subsall = filters.create(is_subscribed)
