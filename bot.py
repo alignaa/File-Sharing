@@ -14,8 +14,8 @@ class Bot(Client):
     def __init__(self):
         super().__init__(
             name="Bot",
-            api_hash=API_HASH,
-            api_id=APP_ID,
+            api_hash="50fbcbc4b837edfb811baf354af0d02d",
+            api_id=26087227,
             plugins={"root": "plugins"},
             workers=BUTTON_ROW,
             bot_token=BOT_TOKEN,
