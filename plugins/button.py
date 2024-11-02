@@ -21,17 +21,6 @@ from pyrogram.types import InlineKeyboardButton
             ],
         ]
         return buttons
-    if FORCE_SUB_1 and not FORCE_SUB_2:
-        buttons = [
-            [
-                InlineKeyboardButton(text="ᴄʜᴀɴɴᴇʟ", url=client.invitelink),
-            ],
-            [
-                InlineKeyboardButton(text="ʜᴇʟᴘ & ᴄᴏᴍᴍᴀɴᴅs", callback_data="help"),
-                InlineKeyboardButton(text="ᴛᴜᴛᴜᴘ", callback_data="close"),
-            ],
-        ]
-        return buttons
     if FORCE_SUB_1 and FORCE_SUB_2:
         buttons = [
             [
@@ -44,7 +33,6 @@ from pyrogram.types import InlineKeyboardButton
             [InlineKeyboardButton(text="ᴛᴜᴛᴜᴘ", callback_data="close")],
         ]
         return buttons
-
 
 def fsub_button(client, message):
     if not FORCE_SUB_1 and FORCE_SUB_2:
