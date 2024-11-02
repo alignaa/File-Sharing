@@ -6,13 +6,13 @@ from logging.handlers import RotatingFileHandler
 
 load_dotenv("config.env")
 
-BOT_TOKEN = getenv("BOT_TOKEN", "")
-APP_ID = int(getenv("APP_ID", ""))
-API_HASH = getenv("API_HASH", "")
-CHANNEL_ID = int(getenv("CHANNEL_ID", ""))
-OWNER = getenv("OWNER", "")
+BOT_TOKEN = getenv("BOT_TOKEN")
+APP_ID = int(getenv("APP_ID"))
+API_HASH = getenv("API_HASH")
+CHANNEL_ID = int(getenv("CHANNEL_ID"))
+OWNER = getenv("OWNER")
 PROTECT_CONTENT = strtobool(getenv("PROTECT_CONTENT", "False"))
-DB_URI = getenv("DATABASE_URL", "")
+DB_URI = getenv("DATABASE_URL")
 BUTTON_ROW = int(getenv("BUTTON_ROW", 2))
 FORCE_SUB_ = {}
 FSUB_TOTAL = 1
