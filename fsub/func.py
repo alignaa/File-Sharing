@@ -6,7 +6,7 @@ from pyrogram.enums import ChatMemberStatus
 from pyrogram.errors import FloodWait
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 
-from config import ADMINS, FORCE_SUB_
+from fsub.config import ADMINS, FORCE_SUB_
 
 async def subscribed(filter, client, update):
     user_id = update.from_user.id
