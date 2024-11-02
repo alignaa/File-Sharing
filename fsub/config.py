@@ -32,6 +32,8 @@ FORCE_MESSAGE = getenv(
     "<b>💬 ᴛᴏ ꜱᴇᴇ ᴛʜᴇ ᴍᴇꜱꜱᴀɢᴇꜱ ᴛʜᴇ ʙᴏᴛ ɪꜱ ꜱʜᴀʀɪɴɢ, ᴊᴏɪɴ ꜰɪʀꜱᴛ, ᴛʜᴇɴ ᴘʀᴇꜱꜱ ᴛʀʏ ᴀɢᴀɪɴ.</b>"
 )
 ADMINS = [int(x) for x in (getenv("ADMINS").split())]
+CUSTOM_CAPTION = getenv("CUSTOM_CAPTION", None)
+DISABLE_CHANNEL_BUTTON = getenv("DISABLE_BUTTON", False)
 
 LOG_FILE_NAME = "logs.txt"
 logging.basicConfig(
