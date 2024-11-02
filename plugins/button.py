@@ -1,7 +1,14 @@
 from fsub.config import FORCE_SUB_1, FORCE_SUB_2
 from pyrogram.types import InlineKeyboardButton
+from pyrogram import enums
 
- def start_button(client):
+def start_button(client, chat):
+    chat_type = (
+        "ɢʀᴏᴜᴘ"
+        if chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]
+        else "ᴄʜᴀɴɴᴇʟ"
+    )
+
     if not FORCE_SUB_1 and not FORCE_SUB_2:
         buttons = [
             [
@@ -9,30 +16,33 @@ from pyrogram.types import InlineKeyboardButton
                 InlineKeyboardButton(text="ᴛᴜᴛᴜᴘ", callback_data="close"),
             ],
         ]
-        return buttons
-    if not FORCE_SUB_1 and FORCE_SUB_2:
+        return InlineKeyboardMarkup(buttons)
+
+    if FORCE_SUB_1 and not FORCE_SUB_2:
         buttons = [
             [
-                InlineKeyboardButton(text="ɢʀᴏᴜᴘ", url=client.invitelink2),
+                InlineKeyboardButton(text=f"{chat_type}", url=client.invitelink),
             ],
             [
                 InlineKeyboardButton(text="ʜᴇʟᴘ & ᴄᴏᴍᴍᴀɴᴅs", callback_data="help"),
                 InlineKeyboardButton(text="ᴛᴜᴛᴜᴘ", callback_data="close"),
             ],
         ]
-        return buttons
+        return InlineKeyboardMarkup(buttons)
+
     if FORCE_SUB_1 and FORCE_SUB_2:
         buttons = [
             [
                 InlineKeyboardButton(text="ʜᴇʟᴘ & ᴄᴏᴍᴍᴀɴᴅs", callback_data="help"),
             ],
             [
-                InlineKeyboardButton(text="ᴄʜᴀɴɴᴇʟ", url=client.invitelink),
-                InlineKeyboardButton(text="ɢʀᴏᴜᴘ", url=client.invitelink2),
+                InlineKeyboardButton(text=f"{chat_type}", url=client.invitelink),
+                InlineKeyboardButton(text=f"{chat_type}", url=client.invitelink2),
             ],
             [InlineKeyboardButton(text="ᴛᴜᴛᴜᴘ", callback_data="close")],
         ]
-        return buttons
+        return InlineKeyboardMarkup(buttons)
+ 
 
 def fsub_button(client, message):
     if not FORCE_SUB_1 and FORCE_SUB_2:
