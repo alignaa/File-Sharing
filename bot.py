@@ -1,8 +1,6 @@
 import sys
 from pyrogram import Client, enums
 from fsub.config import (
-    API_HASH,
-    APP_ID,
     CHANNEL_ID,
     FORCE_SUB_,
     LOGGER,
