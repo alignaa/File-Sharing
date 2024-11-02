@@ -21,12 +21,12 @@ while True:
         break
     FORCE_SUB_[FSUB_TOTAL] = int(value)
     FSUB_TOTAL += 1
-START_MESSAGE = getenv(
+START_MSG = getenv(
     "START_MESSAGE",
     "<b>🙋🏻‍♂️ʜᴀʟᴏ {mention}!</b>\n\n"
     "<b>ᴛʜᴇ ʙᴏᴛ ɪꜱ ᴜᴘ ᴀɴᴅ ʀᴜɴɴɪɴɢ. ᴛʜᴇꜱᴇ ʙᴏᴛꜱ ᴄᴀɴ ꜱᴛᴏʀᴇ ᴍᴇꜱꜱᴀɢᴇꜱ ɪɴ ᴄᴜꜱᴛᴏᴍ ᴄʜᴀᴛꜱ, ᴀɴᴅ ᴜꜱᴇʀꜱ ᴀᴄᴄᴇꜱꜱ ᴛʜᴇᴍ ᴛʜʀᴏᴜɢʜ ᴛʜᴇ ʙᴏᴛ.</b>",
 )
-FORCE_MESSAGE = getenv(
+FORCE_MSG = getenv(
     "FORCE_MESSAGE",
     "<b>🙋🏻‍♂️ʜᴀʟᴏ {mention}!</b>\n\n"
     "<b>💬 ᴛᴏ ꜱᴇᴇ ᴛʜᴇ ᴍᴇꜱꜱᴀɢᴇꜱ ᴛʜᴇ ʙᴏᴛ ɪꜱ ꜱʜᴀʀɪɴɢ, ᴊᴏɪɴ ꜰɪʀꜱᴛ, ᴛʜᴇɴ ᴘʀᴇꜱꜱ ᴛʀʏ ᴀɢᴀɪɴ.</b>"
