@@ -4,7 +4,7 @@ import requests
 from pyrogram import filters
 from pyrogram.types import Message
 from bot import Bot
-from fsub.config import ADMINS
+from config import ADMINS
 
 @Bot.on_message(filters.command("speedtest") & filters.user(ADMINS))
 async def run_speedtest(client: Bot, message: Message):

@@ -3,11 +3,12 @@
 # t.me/SharingUserbot & t.me/Lunatic0de
 
 from bot import Bot
-from fsub.config import OWNER
+from config import OWNER
 from Data import Data
 from pyrogram import filters
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import CallbackQuery, InlineKeyboardMarkup, Message
+
 
 @Bot.on_message(filters.private & filters.incoming & filters.command("about"))
 async def _about(client: Bot, msg: Message):
@@ -18,6 +19,7 @@ async def _about(client: Bot, msg: Message):
         reply_markup=InlineKeyboardMarkup(Data.mbuttons),
     )
 
+
 @Bot.on_message(filters.private & filters.incoming & filters.command("help"))
 async def _help(client: Bot, msg: Message):
     await client.send_message(
@@ -26,6 +28,7 @@ async def _help(client: Bot, msg: Message):
         disable_web_page_preview=True,
         reply_markup=InlineKeyboardMarkup(Data.buttons),
     )
+
 
 @Bot.on_callback_query()
 async def cb_handler(client: Bot, query: CallbackQuery):

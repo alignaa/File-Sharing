@@ -4,7 +4,8 @@ from sqlalchemy import TEXT, Column, Numeric, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-from fsub.config import DB_URI
+from config import DB_URI
+
 
 def start() -> scoped_session:
     engine = create_engine(DB_URI, client_encoding="utf8")
@@ -18,6 +19,7 @@ SESSION = start()
 
 INSERTION_LOCK = threading.RLock()
 
+
 class Broadcast(BASE):
     __tablename__ = "broadcast"
     id = Column(Numeric, primary_key=True)
@@ -27,7 +29,9 @@ class Broadcast(BASE):
         self.id = id
         self.user_name = user_name
 
+
 Broadcast.__table__.create(checkfirst=True)
+
 
 #  Add user details -
 async def add_user(id, user_name):
@@ -38,15 +42,18 @@ async def add_user(id, user_name):
             SESSION.add(usr)
             SESSION.commit()
 
+
 async def delete_user(id):
     with INSERTION_LOCK:
         SESSION.query(Broadcast).filter(Broadcast.id == id).delete()
         SESSION.commit()
 
+
 async def full_userbase():
     users = SESSION.query(Broadcast).all()
     SESSION.close()
     return users
+
 
 async def query_msg():
     try:

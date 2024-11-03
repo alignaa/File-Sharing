@@ -1,10 +1,17 @@
+# (©)Codexbotz
+# Recode by @mrismanaziz
+# t.me/SharingUserbot & t.me/Lunatic0de
+
 import asyncio
+
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+
 from bot import Bot
-from fsub.config import ADMINS, CHANNEL_ID, DISABLE_CHANNEL_BUTTON, LOGGER
-from fsub.func import encode
+from config import ADMINS, CHANNEL_ID, DISABLE_CHANNEL_BUTTON, LOGGER
+from helper_func import encode
+
 
 @Bot.on_message(
     filters.private
@@ -43,7 +50,7 @@ async def channel_post(client: Client, message: Message):
         )
     except Exception as e:
         LOGGER(__name__).warning(e)
-        await reply_text.edit_text("Error!")
+        await reply_text.edit_text("<b>Telah Terjadi Error...</b>")
         return
     converted_id = post_message.id * abs(client.db_channel.id)
     string = f"get-{converted_id}"
@@ -54,14 +61,14 @@ async def channel_post(client: Client, message: Message):
         [
             [
                 InlineKeyboardButton(
-                    "ꜱʜᴀʀᴇ", url=f"https://telegram.me/share/url?url={link}"
-                ),
+                    "🔁 Share Link", url=f"https://telegram.me/share/url?url={link}"
+                )
             ]
         ]
     )
 
     await reply_text.edit(
-        f"ʟɪɴᴋ :\n\n {link}",
+        f"<b>Link Sharing File Berhasil Di Buat :</b>\n\n{link}",
         reply_markup=reply_markup,
         disable_web_page_preview=True,
     )
@@ -75,22 +82,23 @@ async def channel_post(client: Client, message: Message):
         except Exception:
             pass
 
+
 @Bot.on_message(filters.channel & filters.incoming & filters.chat(CHANNEL_ID))
 async def new_post(client: Client, message: Message):
+
     if DISABLE_CHANNEL_BUTTON:
         return
-    
+
     converted_id = message.id * abs(client.db_channel.id)
     string = f"get-{converted_id}"
     base64_string = await encode(string)
     link = f"https://t.me/{client.username}?start={base64_string}"
-
     reply_markup = InlineKeyboardMarkup(
         [
             [
                 InlineKeyboardButton(
-                    "ꜱʜᴀʀᴇ", url=f"https://telegram.me/share/url?url={link}"
-                ),
+                    "🔁 Share Link", url=f"https://telegram.me/share/url?url={link}"
+                )
             ]
         ]
     )

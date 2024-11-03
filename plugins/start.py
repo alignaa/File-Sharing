@@ -1,8 +1,13 @@
+# (©)Codexbotz
+# Recode by @mrismanaziz
+# t.me/SharingUserbot & t.me/Lunatic0de
+
 import asyncio
 from datetime import datetime
 from time import time
+
 from bot import Bot
-from fsub.config import (
+from config import (
     ADMINS,
     CUSTOM_CAPTION,
     DISABLE_CHANNEL_BUTTON,
@@ -10,12 +15,14 @@ from fsub.config import (
     PROTECT_CONTENT,
     START_MSG,
 )
-from fsub.sql import add_user, delete_user, full_userbase, query_msg
+from database.sql import add_user, delete_user, full_userbase, query_msg
 from pyrogram import filters
 from pyrogram.enums import ParseMode
 from pyrogram.errors import FloodWait, InputUserDeactivated, UserIsBlocked
 from pyrogram.types import InlineKeyboardMarkup, Message
-from fsub.func import decode, get_messages, is_subscriber
+
+from helper_func import decode, get_messages, subsall, subsch, subsgc
+
 from .button import fsub_button, start_button
 
 START_TIME = datetime.utcnow()
@@ -28,6 +35,7 @@ TIME_DURATION_UNITS = (
     ("sec", 1),
 )
 
+
 async def _human_time_duration(seconds):
     if seconds == 0:
         return "inf"
@@ -38,7 +46,8 @@ async def _human_time_duration(seconds):
             parts.append(f'{amount} {unit}{"" if amount == 1 else "s"}')
     return ", ".join(parts)
 
-@Bot.on_message(filters.command("start") & filters.private & is_subscriber)
+
+@Bot.on_message(filters.command("start") & filters.private & subsall & subsch & subsgc)
 async def start_command(client: Bot, message: Message):
     id = message.from_user.id
     user_name = (
@@ -121,7 +130,7 @@ async def start_command(client: Bot, message: Message):
             except BaseException:
                 pass
     else:
-        out = await start_button(client)
+        out = start_button(client)
         await message.reply_text(
             text=START_MSG.format(
                 first=message.from_user.first_name,
@@ -136,11 +145,14 @@ async def start_command(client: Bot, message: Message):
             disable_web_page_preview=True,
             quote=True,
         )
+
+
     return
+
 
 @Bot.on_message(filters.command("start") & filters.private)
 async def not_joined(client: Bot, message: Message):
-    buttons = await fsub_button(client, message)
+    buttons = fsub_button(client, message)
     await message.reply(
         text=FORCE_MSG.format(
             first=message.from_user.first_name,
@@ -156,13 +168,15 @@ async def not_joined(client: Bot, message: Message):
         disable_web_page_preview=True,
     )
 
-@Bot.on_message(filters.command(["users", "stats"]) & filters.user(ADMINS)) # GA BISA
+
+@Bot.on_message(filters.command(["users", "stats"]) & filters.user(ADMINS))
 async def get_users(client: Bot, message: Message):
     msg = await client.send_message(
         chat_id=message.chat.id, text="<code>Processing ...</code>"
     )
     users = await full_userbase()
     await msg.edit(f"{len(users)} <b>Pengguna menggunakan bot ini</b>")
+
 
 @Bot.on_message(filters.command("broadcast") & filters.user(ADMINS))
 async def send_text(client: Bot, message: Message):
@@ -211,6 +225,7 @@ Akun Terhapus: <code>{deleted}</code></b>"""
         await asyncio.sleep(8)
         await msg.delete()
 
+
 @Bot.on_message(filters.command("ping"))
 async def ping_pong(client, m: Message):
     start = time()
@@ -224,6 +239,7 @@ async def ping_pong(client, m: Message):
         f"<b>• Pinger -</b> <code>{delta_ping * 1000:.3f}ms</code>\n"
         f"<b>• Uptime -</b> <code>{uptime}</code>\n"
     )
+
 
 @Bot.on_message(filters.command("uptime"))
 async def get_uptime(client, m: Message):
