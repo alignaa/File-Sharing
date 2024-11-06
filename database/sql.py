@@ -6,19 +6,16 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 from config import DB_URI
 
-
 def start() -> scoped_session:
     engine = create_engine(DB_URI, client_encoding="utf8")
     BASE.metadata.bind = engine
     BASE.metadata.create_all(engine)
     return scoped_session(sessionmaker(bind=engine, autoflush=False))
 
-
 BASE = declarative_base()
 SESSION = start()
 
 INSERTION_LOCK = threading.RLock()
-
 
 class Broadcast(BASE):
     __tablename__ = "broadcast"
@@ -29,9 +26,7 @@ class Broadcast(BASE):
         self.id = id
         self.user_name = user_name
 
-
 Broadcast.__table__.create(checkfirst=True)
-
 
 #  Add user details -
 async def add_user(id, user_name):
@@ -42,18 +37,15 @@ async def add_user(id, user_name):
             SESSION.add(usr)
             SESSION.commit()
 
-
 async def delete_user(id):
     with INSERTION_LOCK:
         SESSION.query(Broadcast).filter(Broadcast.id == id).delete()
         SESSION.commit()
 
-
 async def full_userbase():
     users = SESSION.query(Broadcast).all()
     SESSION.close()
     return users
-
 
 async def query_msg():
     try:
