@@ -54,11 +54,14 @@
       "value": "<b>Hello {first}\n\nAnda harus bergabung di Channel/Grup saya untuk menggunakan saya\n\nSilakan Join Ke Channel Terlebih Dahulu</b>"
     }
   },
-  "DATABASE_URL": {
-    "description": "Database Sql",
-    "value": "postgres://hvtvvzxj:NxVNaSsbHqQ2z5Wb3MQw7YKcUCO_fdZs@john.db.elephantsql.com/hvtvvzxj"
-  }
-  ,
+  "addons": [
+    {
+    "plan": "heroku-postgresql",
+      "options": {
+        "version": "15"
+      }
+    }
+  ],
   "buildpacks": [
     {
       "url": "heroku/python"
