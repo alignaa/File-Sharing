@@ -12,14 +12,9 @@ API_HASH = os.environ.get("API_HASH", "")
 CHANNEL_ID = int(os.environ.get("CHANNEL_ID", ""))
 OWNER = os.environ.get("OWNER", "")
 PROTECT_CONTENT = strtobool(os.environ.get("PROTECT_CONTENT", "False"))
-
-# Heroku Credentials for updater.
-# HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
-# HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
-
-# Custom Repo for updater.
-# UPSTREAM_BRANCH = os.environ.get("UPSTREAM_BRANCH", "master")
-
+HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
+HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
+UPSTREAM_BRANCH = os.environ.get("UPSTREAM_BRANCH", "master")
 DB_URI = os.environ.get("DATABASE_URL", "")
 FORCE_SUB_1 = int(os.environ.get("FORCE_SUB_1", "0"))
 FORCE_SUB_2 = int(os.environ.get("FORCE_SUB_2", "0"))
