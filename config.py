@@ -6,7 +6,7 @@ from logging.handlers import RotatingFileHandler
 
 load_dotenv("config.env")
 
-BOT_TOKEN = os.getenv("BOT_TOKEN", "")
+TG_BOT_TOKEN = os.getenv("BOT_TOKEN", "")
 APP_ID = int(os.getenv("APP_ID", "19712136"))
 API_HASH = os.getenv("API_HASH", "ea41929ce6a602e4293475f030bb91bd")
 CHANNEL_DB = int(os.getenv("CHANNEL_DB", ""))
